@@ -229,6 +229,41 @@ html:not(.js) .scratch canvas{display:none!important}
 
 /* scratch box keeps one steady width now the date is shorter */
 .scratch{min-width:72cqw;box-sizing:border-box;text-align:center}
+
+/* last page: send your wishes, then a notice board of everyone's */
+.pg.wish .in{top:calc(env(safe-area-inset-top) + 8%);bottom:calc(env(safe-area-inset-bottom) + 9%);height:auto;justify-content:flex-start}
+.pg.wish .wfor{margin-top:1cqw}
+.pg.wish .dv{margin:2.4cqw 0 3cqw}
+.wf,.wb{width:100%;background:rgba(253,248,240,.93);border:1px solid rgba(176,138,79,.55);box-shadow:0 0 0 .5cqw rgba(253,248,240,.6),0 1.6cqw 4.4cqw rgba(110,72,28,.16);border-radius:1.4cqw;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.wf{display:flex;flex-direction:column;gap:2.6cqw;padding:5cqw 5cqw 4.4cqw}
+.wf input,.wf textarea{width:100%;font:400 max(16px,4cqw)/1.4 Cg,Georgia,serif;color:#5a4030;background:transparent;border:0;border-bottom:1px solid rgba(176,138,79,.55);border-radius:0;padding:1.6cqw .4cqw;outline:none;-webkit-appearance:none;appearance:none;transition:border-color .3s ease}
+.wf textarea{resize:none;height:calc(max(16px,4cqw) * 1.4 * 4 + 3.2cqw);border:1px solid rgba(176,138,79,.4);padding:2cqw 2.4cqw}
+.wf input:focus,.wf textarea:focus{border-color:#b08a4f}
+.wf ::placeholder{color:#a0846a;font-style:italic;opacity:1}
+.wf .hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+.wf .pill{align-self:center;margin-top:1.4cqw;transition:transform .16s cubic-bezier(.16,1,.3,1),opacity .3s ease}
+.wf .pill:active{transform:scale(.97)}
+.wf .pill:disabled{opacity:.55;cursor:default}
+.wmsg{min-height:1.4em;font:italic 400 3.3cqw/1.4 Cg;color:#7a5424}
+.wlink{margin-top:3.4cqw;background:none;border:0;padding:1.4cqw 2cqw;font:italic 400 3.6cqw/1.3 Cg,Georgia,serif;color:#7a5424;text-decoration:underline;text-decoration-color:rgba(176,138,79,.6);text-underline-offset:.35em;cursor:pointer;text-shadow:0 0 1.6cqw rgba(255,251,245,.95)}
+.wb{flex:1;min-height:0;display:flex;flex-direction:column;align-items:center;padding:4cqw 3cqw 3cqw}
+.wb[hidden],.wlink[hidden],.wf[hidden]{display:none}
+.wty{font:400 6.4cqw/1.15 Pinyon;color:#7a5424;margin-bottom:1.6cqw;text-align:center}
+.wty:empty{display:none}
+.wbh{font:600 2.6cqw/1.4 Cg;letter-spacing:.36em;text-transform:uppercase;color:#7a5424;margin-bottom:2.4cqw}
+.wlist{flex:1;min-height:0;width:100%;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;touch-action:pan-y;padding:2cqw 3cqw 3cqw;display:flex;flex-direction:column;gap:3.4cqw;scrollbar-width:thin;scrollbar-color:rgba(176,138,79,.45) transparent}
+.wn{--r:-1deg;flex:none;background:#fffaf0;border:1px solid #b08a4f;box-shadow:0 .4cqw 1.6cqw rgba(110,72,28,.14);padding:3.4cqw 4cqw 2.6cqw;text-align:left;transform:rotate(var(--r));animation:wpop .9s cubic-bezier(.16,1,.3,1) both}
+.wn:nth-child(even){--r:.9deg}
+.wn p{font:400 3.7cqw/1.45 Cg;color:#5a4030;white-space:pre-wrap;overflow-wrap:anywhere}
+.wn b{display:block;margin-top:1.2cqw;font:400 5.6cqw/1.1 Pinyon;color:#7a5424;text-align:right}
+.wempty{font:italic 400 3.6cqw/1.4 Cg;color:#7a5424;text-align:center;padding:4cqw 0}
+@keyframes wpop{from{opacity:0;transform:translateY(3cqw) scale(.94) rotate(var(--r))}to{opacity:1;transform:rotate(var(--r))}}
+@media (prefers-reduced-motion:reduce){.wn{animation:none}}
+/* scroll arrow on every page but the last; replaces the page-1-only hint when scripts run */
+html.js .pg .hint{display:none}
+#nxt{position:absolute;left:50%;bottom:calc(env(safe-area-inset-bottom) + 20cqw);transform:translateX(-50%);z-index:8;display:flex;flex-direction:column;align-items:center;gap:1cqw;padding:2cqw 4cqw 2cqw calc(4cqw + .38em);background:none;border:0;color:#9a7440;font:600 2.4cqw/1 Cg;letter-spacing:.38em;text-transform:uppercase;text-shadow:0 0 1.5cqw rgba(255,250,240,.95);opacity:0;pointer-events:none;transition:opacity .8s;cursor:pointer;-webkit-tap-highlight-color:transparent}
+html:not(.js) #nxt{display:none}
+body.open #nxt.show{opacity:1;pointer-events:auto;transition-delay:1.2s}
 </style>
 </head>
 <body><input type="checkbox" id="go" hidden>
@@ -336,7 +371,22 @@ html:not(.js) .scratch canvas{display:none!important}
   <div class="eye t">The Kanpara family</div>
   <div class="cd t" id="cd"></div>
  </div></section>
-</div><div id="dots"></div>
+ <!-- PAGE 7 -->
+ <section class="pg wish" id="wish"><div class="in">
+  <div class="eye t">Send your wishes</div>
+  <div class="sm it t wfor">A few words for Pratha &amp; Rachit</div>
+  <div class="dv"></div>
+  <form class="wf" id="wf" autocomplete="off" novalidate>
+   <input name="n" maxlength="40" placeholder="Your name" aria-label="Your name" autocomplete="name">
+   <textarea name="m" maxlength="400" rows="4" placeholder="Your message" aria-label="Your message"></textarea>
+   <input name="hp" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+   <button type="submit" class="pill">Send with love</button>
+   <div class="wmsg" aria-live="polite"></div>
+  </form>
+  <button type="button" class="wlink wread">Read everyone&rsquo;s wishes</button>
+  <div class="wb" id="wb" hidden><div class="wty" aria-live="polite"></div><div class="wbh">Wishes for the couple</div><div class="wlist"></div><button type="button" class="wlink wback" hidden>Send your own wish</button></div>
+ </div></section>
+</div><div id="dots"></div><button type="button" id="nxt" aria-label="Next page"><span>Scroll</span><i class="chev"></i></button>
  <div id="acts"></div>
  <div id="snd"><svg viewBox="0 0 24 24"><path d="M4 9h4l5-4v14l-5-4H4z"/><path id="wv" d="M16 8.5c1.4 1 1.4 6 0 7M18.5 6c2.8 2.2 2.8 9.8 0 12"/></svg></div>
  <div id="toast"></div>
@@ -505,6 +555,58 @@ function openCal(ids){closeCal();const c=document.createElement('div');c.id='cal
   '<small class="snd-note">sound on</small>';
  cap.querySelectorAll('[data-s]').forEach(b=>b.addEventListener('click',e=>{apply(b.dataset.s);cap.classList.add('chosen');b.classList.add('on');openInv()}));
 })();
+
+// last page: send your wishes, then a notice board of everyone's (a Google Sheet behind an Apps Script web app)
+(function(){
+ const URL_W='https://script.google.com/macros/s/AKfycbw5Sp7KSUOy_DBEsvCx4aHtKrOQa5hbxuBRMziD1VsKWVildIUc5CEvoGvydzKkWvGH/exec';
+ const pgW=document.getElementById('wish');if(!pgW)return;
+ const f=pgW.querySelector('#wf'),b=pgW.querySelector('#wb'),list=b.querySelector('.wlist'),ty=b.querySelector('.wty'),
+  msg=f.querySelector('.wmsg'),btn=f.querySelector('button'),rd=pgW.querySelector('.wread'),bk=b.querySelector('.wback'),fr=pgW.querySelector('.wfor');
+ const nm=()=>window.NM||'Pratha & Rachit';
+ const setFor=()=>{fr.textContent='A few words for '+nm()};
+ new IntersectionObserver(es=>{if(es[0].isIntersecting)setFor()},{root:sc,threshold:.3}).observe(pgW);
+ // typing must not move the pages (the page keydown handler scrolls on space and arrows)
+ [...f.querySelectorAll('input,textarea')].forEach(el=>el.addEventListener('keydown',e=>e.stopPropagation()));
+ // the stage clips its overflow and must never scroll (PageUp in the textarea or a phone keyboard can nudge it)
+ st.addEventListener('scroll',()=>{if(st.scrollTop||st.scrollLeft){st.scrollTop=0;st.scrollLeft=0}});
+ const seen=new Set();let shown=0,timer=null,sent=false;
+ function note(w,delay){const d=document.createElement('div');d.className='wn';d.style.animationDelay=delay+'ms';
+  const p=document.createElement('p');p.textContent=w.m;const n=document.createElement('b');n.textContent='— '+w.n;d.append(p,n);return d}
+ function render(ws){const fresh=ws.filter(w=>{const k=w.n+'\u0001'+w.m;if(seen.has(k))return false;seen.add(k);return true});
+  if(!fresh.length){if(!seen.size&&!list.querySelector('.wempty')){const e=document.createElement('div');e.className='wempty';e.textContent='Be the first to send a wish.';list.appendChild(e)}return}
+  const e=list.querySelector('.wempty');if(e)e.remove();
+  // newest at the top, popping in one after another
+  fresh.sort((x,y)=>(y.t||0)-(x.t||0)).forEach((w,i)=>{const d=note(w,Math.min(i,14)*110);d.dataset.t=w.t||0;
+   const after=[...list.children].find(c=>+c.dataset.t<(w.t||0));list.insertBefore(d,after||null);shown++});
+  [...list.children].forEach((c,i)=>c.style.setProperty('--r',i%2?'.9deg':'-1deg'))}
+ function load(){return fetch(URL_W,{cache:'no-store'}).then(r=>r.json()).then(d=>{if(d&&d.ok&&Array.isArray(d.wishes))render(d.wishes)}).catch(()=>{})}
+ function board(){f.hidden=true;rd.hidden=true;b.hidden=false;bk.hidden=sent;load();
+  if(!timer)timer=setInterval(()=>{if(document.visibilityState==='visible'&&cur===pg.indexOf(pgW))load()},30000)}
+ rd.addEventListener('click',e=>{e.stopPropagation();ty.textContent='';board()});
+ bk.addEventListener('click',e=>{e.stopPropagation();b.hidden=true;f.hidden=false;rd.hidden=false});
+ f.addEventListener('submit',e=>{e.preventDefault();
+  const n=f.n.value.replace(/\s+/g,' ').trim().slice(0,40),m=f.m.value.replace(/\s+/g,' ').trim().slice(0,400);
+  if(!n){msg.textContent='Please add your name.';f.n.focus();return}
+  if(!m){msg.textContent='Please write a few words.';f.m.focus();return}
+  msg.textContent='Sending…';btn.disabled=true;
+  fetch(URL_W,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({n,m,s:window.SIDE||'bride',hp:f.hp.value})})
+   .then(r=>r.json()).then(d=>{if(!d||!d.ok)throw 0;
+    sent=true;msg.textContent='';document.activeElement&&document.activeElement.blur&&document.activeElement.blur();
+    ty.textContent='Thank you, '+n.split(' ')[0]+'. Your wish is with them now.';
+    render([{n,m,t:Date.now()}]);board();f.reset()})
+   .catch(()=>{msg.textContent='That did not send. Please try again.'})
+   .finally(()=>{btn.disabled=false})});
+})();
+// scroll arrow: shown on every page but the last, a tap goes to the next page
+;(()=>{const nx=document.getElementById('nxt');if(!nx)return;
+ const A=document.getElementById('acts');
+ const upd=()=>{nx.classList.toggle('show',cur>=0&&cur<pg.length-1);
+  // on a page with action buttons, sit just above them
+  nx.style.bottom=A&&A.children.length?(st.getBoundingClientRect().bottom-A.getBoundingClientRect().top+4)+'px':''};
+ addEventListener('resize',upd);
+ const _set=setCur;setCur=i=>{_set(i);upd()};
+ nx.addEventListener('click',e=>{e.stopPropagation();const n=pg[cur+1];if(n)n.scrollIntoView({behavior:'smooth'})});
+ upd()})();
 </script>
 </body>
 </html>
