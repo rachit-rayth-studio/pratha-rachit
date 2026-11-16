@@ -226,6 +226,9 @@ html:not(.js) .scratch canvas{display:none!important}
 #gate .cap.chosen .side .pill:not(.on){opacity:.45;transition:opacity .3s ease}
 #gate .cap .snd-note{margin-top:1.4cqw;font:italic 400 3cqw/1 Cg;color:#7f6450}
 @media (hover:hover){#gate .cap .side .pill:hover{filter:brightness(1.05)}}
+
+/* scratch box keeps one steady width now the date is shorter */
+.scratch{min-width:72cqw;box-sizing:border-box;text-align:center}
 </style>
 </head>
 <body><input type="checkbox" id="go" hidden>
@@ -277,7 +280,7 @@ html:not(.js) .scratch canvas{display:none!important}
   <div class="amp">&amp;</div>
   <div class="names">Rachit</div>
   <div class="dv"></div>
-  <div class="scratch" id="scr"><div class="date t">15 – 18 JANUARY 2027</div><canvas></canvas></div>
+  <div class="scratch" id="scr"><div class="date t">18 JANUARY 2027</div><canvas></canvas></div>
   <div class="sm it t">New Haveli · Mansarovar · Jaipur</div>
  </div><div class="hint"><span>Scroll</span><i class="chev"></i></div></section>
  <!-- PAGE 2 -->
@@ -408,7 +411,7 @@ addEventListener('keydown',e=>{if(!document.body.classList.contains('open'))retu
   const gr=g.createLinearGradient(0,0,c.width,c.height);gr.addColorStop(0,'#f3dfab');gr.addColorStop(.35,'#c9a15a');gr.addColorStop(.55,'#f6e6bd');gr.addColorStop(.8,'#b88a45');gr.addColorStop(1,'#e8cd8e');g.globalCompositeOperation='source-over';g.fillStyle=gr;g.fillRect(0,0,c.width,c.height);
   for(let k=0;k<900;k++){g.fillStyle='rgba(255,255,255,'+(Math.random()*.25)+')';g.fillRect(Math.random()*c.width,Math.random()*c.height,1.2*d,1.2*d)}
   g.strokeStyle='rgba(255,248,230,.75)';g.lineWidth=1*d;g.setLineDash([3*d,4*d]);g.strokeRect(5*d,5*d,c.width-10*d,c.height-10*d);g.setLineDash([]);
-  g.fillStyle='#6b4a1c';g.textAlign='center';g.textBaseline='middle';g.font='600 '+Math.round(c.height*.30)+'px Cg, Georgia, serif';g.fillText('✦  SCRATCH TO REVEAL THE DATE  ✦',c.width/2,c.height/2);ready=true}
+  g.fillStyle='#6b4a1c';g.textAlign='center';g.textBaseline='middle';const LB='✦  SCRATCH TO REVEAL THE DATE  ✦';let fs=c.height*.30;g.font='600 '+Math.round(fs)+'px Cg, Georgia, serif';while(g.measureText(LB).width>c.width-30*d&&fs>6){fs*=.94;g.font='600 '+Math.round(fs)+'px Cg, Georgia, serif'}g.fillText(LB,c.width/2,c.height/2);ready=true}
  function pos(e){const r=c.getBoundingClientRect(),d=devicePixelRatio||1;return[(e.clientX-r.left)*d,(e.clientY-r.top)*d]}
  function scratch(p){g.globalCompositeOperation='destination-out';g.lineCap='round';g.lineJoin='round';g.lineWidth=c.height*.42;g.beginPath();g.moveTo(...(last||p));g.lineTo(...p);g.stroke();last=p;box.classList.add('started')}
  function check(){if(done)return;const im=g.getImageData(0,0,c.width,c.height).data;let cl=0,n=0;for(let k=3;k<im.length;k+=64){n++;if(im[k]<40)cl++}if(cl/n>.5){done=true;box.classList.add('done');navigator.vibrate&&navigator.vibrate(30);burst()}}
@@ -458,7 +461,7 @@ rs();addEventListener('resize',rs);
  }
  // countdown, calm: updates once a minute
  const cd=$('#cd'),T=Date.parse('2027-01-15T09:15:00+05:30');
- function tick(){const ms=T-Date.now();if(ms<=0){cd.innerHTML='<b>Today, with love</b>';return}const d=Math.floor(ms/864e5),h=Math.floor(ms%864e5/36e5);cd.innerHTML=d>0?'<b>'+d+' days</b>to go':'<b>'+h+' hours</b>to go'}
+ function tick(){const ms=T-Date.now();if(ms<=0){cd.innerHTML=Date.now()<Date.parse('2027-01-19T06:00:00+05:30')?'<b>The celebrations are on</b>':'<b>Thank you for celebrating with us</b>';return}const d=Math.floor(ms/864e5),h=Math.floor(ms%864e5/36e5);cd.innerHTML=d>0?'<b>'+d+' days</b>to go':'<b>'+h+' hours</b>to go'}
  if(cd){tick();setInterval(tick,6e4)}
 })();
 // buttons as real links (the shared-link viewer blocks downloads and pop-ups); calendar via Google + .ics
